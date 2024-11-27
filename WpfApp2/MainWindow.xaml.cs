@@ -192,13 +192,6 @@ namespace WpfApp2
                     currencies.Sort(); // Sort alphabetically
                     FromCurrency.ItemsSource = currencies;
                     ToCurrency.ItemsSource = currencies;
-
-                    // Set default selections (e.g., USD to EUR)
-                    int usdIndex = currencies.IndexOf("USD");
-                    int eurIndex = currencies.IndexOf("EUR");
-
-                    FromCurrency.SelectedIndex = usdIndex >= 0 ? usdIndex : 0;
-                    ToCurrency.SelectedIndex = eurIndex >= 0 ? eurIndex : 1;
                 }
                 else
                 {

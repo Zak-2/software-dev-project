@@ -268,7 +268,7 @@
                            PreviewTextInput="AmountTextBox_PreviewTextInput"
                            MaxLength="15"/>
                     <TextBlock x:Name="AmountPlaceholder"
-                             Text="Enter amount"
+                             Text=" Enter amount"
                              Foreground="#94a3b8"
                              VerticalAlignment="Center"
                              Margin="12,0"

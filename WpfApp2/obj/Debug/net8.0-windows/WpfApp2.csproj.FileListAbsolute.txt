@@ -37,3 +37,4 @@ C:\Users\30207450\Documents\NescolProject-main\WpfApp2\obj\Debug\net8.0-windows\
 C:\Users\30207450\Documents\NescolProject-main\WpfApp2\obj\Debug\net8.0-windows\WpfApp2.pdb
 C:\Users\30207450\Documents\NescolProject-main\WpfApp2\obj\Debug\net8.0-windows\WpfApp2.genruntimeconfig.cache
 C:\Users\30207450\Documents\NescolProject-main\WpfApp2\obj\Debug\net8.0-windows\ref\WpfApp2.dll
+C:\Users\30207450\Documents\NescolProject-main\WpfApp2\obj\Debug\net8.0-windows\WpfApp2.sourcelink.json
