@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace WpfApp2
             InitializeUI();
             LoadCurrencies();
         }
-        
+
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -94,7 +95,7 @@ namespace WpfApp2
             };
         }
 
-        private async Task<List<string>> FetchCurrencies(string url)
+        private async Task<Dictionary<string, string>> FetchCurrencies(string url)
         {
             using (var client = new HttpClient())
             {
@@ -105,13 +106,13 @@ namespace WpfApp2
                     response.EnsureSuccessStatusCode();
 
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    var currencies = new List<string>();
+                    var currencies = new Dictionary<string, string>();
 
                     using (JsonDocument doc = JsonDocument.Parse(responseBody))
                     {
                         foreach (JsonProperty property in doc.RootElement.EnumerateObject())
                         {
-                            currencies.Add(property.Name.ToUpper());
+                            currencies[property.Name.ToUpper()] = property.Value.GetString();
                         }
                     }
 
@@ -189,9 +190,10 @@ namespace WpfApp2
 
                 if (currencies != null && currencies.Count > 0)
                 {
-                    currencies.Sort(); // Sort alphabetically
-                    FromCurrency.ItemsSource = currencies;
-                    ToCurrency.ItemsSource = currencies;
+                    var formattedCurrencies = currencies.Select(c => $"{c.Key} | {c.Value}").ToList();
+                    formattedCurrencies.Sort(); // Sort alphabetically
+                    FromCurrency.ItemsSource = formattedCurrencies;
+                    ToCurrency.ItemsSource = formattedCurrencies;
                 }
                 else
                 {
@@ -217,8 +219,8 @@ namespace WpfApp2
                 return;
             }
 
-            string fromCurrency = FromCurrency.SelectedItem.ToString();
-            string toCurrency = ToCurrency.SelectedItem.ToString();
+            string fromCurrency = FromCurrency.SelectedItem.ToString().Split('|')[0].Trim();
+            string toCurrency = ToCurrency.SelectedItem.ToString().Split('|')[0].Trim();
 
             if (double.TryParse(AmountTextBox.Text, out double amount))
             {
